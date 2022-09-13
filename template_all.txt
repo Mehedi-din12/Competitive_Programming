@@ -1,0 +1,533 @@
+//In the name of ALLAH
+
+#include<bits/stdc++.h>
+using namespace std;
+//================================================================================================
+#define fast_io   ios_base::sync_with_stdio(false), cin.tie(0), cout.tie(0)
+#define nl "\n"
+#define pi acos(-1.00)//2.0*acos(0.0)
+//================================================================================================
+typedef long long int lli;
+//================================================================================================
+const lli INF = 1e18;
+const lli N_INF = -1e18;
+const int N=2e7;
+const double EPS = (double) 1e-9;
+//================================================================================================
+void fileReadWrite(){freopen("input.txt","r",stdin);freopen("output.txt","w",stdout);}
+int PowNaive(int b,int p){int prod=1;while(p--)prod*=b;return prod;} //o(expo)
+double rad_to_deg(double x){return x*(180.0/pi);}
+double deg_to_rad(double x){return x*(pi/180.0);}
+//================================================================================================
+lli factorial[20];//from 0! to 19!
+void factorialFunc(){factorial[0]=1;for(int i=1;i<20;i++) factorial[i]=factorial[i-1]*i;}
+bool isLeapYear(lli yr){if( (yr%400==0) || ((yr%100!=0)&&(yr%4==0)) )return true;return false;}
+//================================================================================================
+
+//vector<bool> haha(1000,true);
+
+//================================================================================================
+//memset(arr, 0, sizeof(arr));
+//for(int i = 0; i < m; i++)
+//{
+//int x, y;
+//cin >> x >> y;
+//arr[x]++;
+//if(y + 1 < n)
+//{
+//arr[y + 1]--;
+//}
+//}
+//for(int i = 1; i < n; i++)
+//{
+//arr[i] += arr[i - 1];
+//}
+//================================================================================================
+//deque <int> dq; // 2 1
+//dq.push_back(1);
+//dq.push_front(2);
+//dq.push_back(3);
+//dq.push_front(4);
+//cout << dq.back() << ln;
+//cout << dq.front() << ln;
+//int n = dq.size();
+//for(int i = 0; i < n; i++)
+//{
+//cout << dq[i] << " ";
+//}
+//cout << ln;
+//dq.pop_back();
+//dq.pop_front();
+//for(int i = 0; i < dq.size(); i++)
+//{
+//cout << dq[i] << " ";
+//}
+//================================================================================================
+//queue <int> q;
+//q.push(1);
+//q.push(2);
+//q.push(3);
+//q.push(4);
+////    cout << q.size();
+//while(!q.empty())
+//{
+//cout << q.front() << ln;
+//q.pop();
+//}
+//================================================================================================
+//stack <int> st;
+//st.push(1);
+//st.push(2);
+//st.push(3);
+//st.push(4);
+////    cout << st.size() << “\n”;
+//while(!st.empty())
+//{
+//cout << st.top() << “\n”;
+//st.pop();
+//}
+//
+//
+//bool isBalancedParentheses(const string& str)
+//{
+//  int n = str.size();
+//  stack <char> st;
+//  for(int i = 0; i < n; i++)
+//  {
+//    if(str[i] == '(')
+//    {
+//      st.push(str[i]);
+//    }
+//    else
+//    {
+//      if(st.empty())
+//      {
+//        return false;
+//      }
+//      st.pop();
+//    }
+//  }
+//  if(st.empty())
+//  {
+//    return true;
+//  }
+//  return false;
+//}
+
+//================================================================================================
+//for(int i = 0; i < m; i++)
+//{
+//int x, y;
+//cin >> x >> y;
+//arr[x]++;
+//if(y + 1 < n)
+//{
+//arr[y + 1]--;
+//}
+//}
+//for(int i = 1; i < n; i++)
+//{
+//arr[i] += arr[i - 1];
+//}
+
+//================================================================================================
+
+//================================================================================================
+vector<lli> divisorFunc(lli n)  // o(sqn)
+{
+  vector<lli> vectorOfDivisors;
+  lli sq= (lli)sqrt(n);
+  for(lli i=1;i<=sq;i++)
+  {
+    if(n%i==0)
+    {
+      vectorOfDivisors.push_back(i);
+      lli quot= n / i;
+      if(quot != i)
+        vectorOfDivisors.push_back(quot);
+    }
+  }
+  sort(vectorOfDivisors.begin(),vectorOfDivisors.end());
+  return vectorOfDivisors;
+}
+//================================================================================================
+
+bool isPrimeFunc(lli n)  //o(sqn)
+{
+  if(n==2) return true;
+  if(n<2) return false;
+  if(n%2==0) return false;
+
+  lli sq=(lli) sqrt(n);
+  for(int i=3;i<=sq;i+=2)
+  {
+    if(n%i ==0) return false;
+  }
+
+  return true;
+}
+//================================================================================================
+
+lli powerFunc[20];
+lli base=10;
+void gen_pow()
+{
+  powerFunc[0]=1;
+  for(int i=1;i<=9;i++)
+  {
+    powerFunc[i]= powerFunc[i - 1] * base;
+  }
+}
+//================================================================================================
+
+lli gcd(lli a,lli b)
+{
+  if(b==0) return a;
+  return gcd(b,a%b);
+}
+
+lli lcm(lli a,lli b)
+{
+  return a/ gcd(a,b) *b;
+}
+
+//================================================================================================
+
+bool isPrime[N+5];
+vector<int> primes;
+void sieve()  //--> o(n lgn)
+{
+  isPrime[0]= true;
+  isPrime[1]= true;
+
+  for(int i=4;i<=N;i+=2)
+    isPrime[i]= true;
+
+  //int sq= (int)sqrt(N);  --> please don't use this.
+  for(int i=3;(1LL*i*i)<=N;i+=2)
+  {
+    if(!isPrime[i])
+    {
+      for(int j=i*i;j<=N;j+=2*i)
+        isPrime[j]= true;
+    }
+  }
+
+  primes.push_back(2);
+  for(int i=3;i<=N;i+=2)
+    if(!isPrime[i])
+      primes.push_back(i);
+}
+
+//================================================================================================
+
+int nod[N+5];
+int sod[N+5];
+void calc_nod_sod()  //--> o(n lgn)
+{
+  for(int i=1;i<=N;i++)
+  {
+    for(int j=i; j<=N;j+=i)
+    {
+      nod[j]++;
+      sod[j]+=i;
+    }
+  }
+}
+
+//================================================================================================
+
+// all sub sequence
+string allSub="meh";
+void sub(int idx,string ans) // o(2^size of string)
+{
+  if(idx>=allSub.size())
+  {
+    cout<<ans<<nl;
+    return;
+  }
+
+  sub(idx+1,ans+allSub[idx]);
+  sub(idx+1,ans);
+}
+
+//================================================================================================
+
+int StringRem(string s,int mod)
+{
+  int rem=0;
+  unsigned int len=s.size();
+  for(int i=0;i<len;i++)
+  {
+    rem=((rem*10)+(s[i]-'0'))%mod;
+  }
+  return rem;
+}
+
+//================================================================================================
+
+lli binary_expo(lli bas,lli pwr) //o(lg2 (exponent))
+{
+  if(pwr==0)
+    return 1;
+  if(pwr%2==0)
+  {
+    lli half=pwr/2;
+    lli val= binary_expo(bas,half);
+    return val*val;
+  }
+  else
+    return bas* binary_expo(bas,pwr-1);
+}
+
+//================================================================================================
+
+lli binary_expo_mod(lli bas,lli pwr,lli mod) //o(lg2 (exponent))
+{
+  if(pwr==0)
+    return 1;
+  if(pwr%2==0)
+  {
+    lli half=pwr/2;
+    lli val= binary_expo_mod(bas,half,mod);
+    return (val*val)%mod;
+  }
+  else
+    return (bas* binary_expo_mod(bas,pwr-1,mod))%mod;
+}
+
+//================================================================================================
+
+map<lli,int> pfCnt;
+vector<lli> get_pf(lli n)
+{
+  vector<lli> pf;
+  unsigned int lenOfPrimes=primes.size();
+  for(lli i=0;i<lenOfPrimes && primes[i]*primes[i]<=n;i++)
+  {
+    if(n%primes[i]==0)
+    {
+      pf.push_back(primes[i]);
+      n/=primes[i];
+      pfCnt[primes[i]]++;
+      while (n%primes[i]==0)
+      {
+        n/=primes[i];
+        pfCnt[primes[i]]++;
+      }
+    }
+  }
+  if(n>1)
+  {
+    pf.push_back(n);
+    pfCnt[n]++;
+  }
+  return pf;
+}
+
+//Alter
+vector<lli> get_pf(lli n)
+{
+  vector<lli> pf;
+  for(lli i=2;(i*i)<=n;i++)
+  {
+    if(n%i==0)
+    {
+      pf.push_back(i);
+      n/=i;
+      while (n%i==0)
+      {
+        pf.push_back(i);
+        n/=i;
+      }
+    }
+  }
+  if(n>1)
+  {
+    pf.push_back(n);
+  }
+  return pf;
+}
+
+//================================================================================================
+
+// pf of factorial
+vector<pair<int, int>> factorize_factorial_v2(int n) {
+  vector<pair<int, int>> result;
+  for (auto p : primes) {
+    if (p > n) break;
+    int expo = 0;
+    // copy n to a temporary variable
+    auto n_tmp = n;
+    // get occurence-count of p^1
+    auto q = n_tmp / p;
+    while (q > 0) {
+      // add current occurence-count
+      expo += q;
+      // update "temporary n" to current quotient
+      n_tmp = q;
+      // divide "temporary n" and get the quotient
+      // which is the next occurence-count
+      q = n_tmp / p;
+    }
+    result.emplace_back(p, expo);
+  }
+  return result;
+}
+
+//================================================================================================
+
+// trailing zero
+int trailing_zero(int n)
+{
+  int cnt=0;
+  for(int i=5;n/i>0;i*=5)
+    cnt+=n/i;
+  return cnt;
+}
+
+//================================================================================================
+
+//// Binary search
+//bool binarySearch(int target)
+//{
+//    int lo=0,hi=primes.size()-1,pos=-1;
+//    while (lo<=hi)
+//    {
+//        int mid=lo+(hi-lo)/2;
+//
+//        if(primes[mid]==target)
+//        {
+//            return true;
+//        }
+//        else if(primes[mid]<target)
+//        {
+//            lo=mid+1;
+//        }
+//        else if(primes[mid]>target)
+//        {
+//            hi=mid-1;
+//        }
+//    }
+//
+//    return false;
+//}
+
+// Binary search
+vector<int> vectorObjectForBinarySearch;
+int binarySearch(int target)
+{
+  int lo=0,hi=vectorObjectForBinarySearch.size()-1,pos=-1;
+  while (lo<=hi)
+  {
+    int mid=lo+(hi-lo)/2;
+
+    if(vectorObjectForBinarySearch[mid]==target)
+    {
+      pos=mid;
+      hi=mid-1;
+    }
+    else if(vectorObjectForBinarySearch[mid]<target)
+    {
+      lo=mid+1;
+    }
+    else if(vectorObjectForBinarySearch[mid]>target)
+    {
+      hi=mid-1;
+    }
+  }
+
+  return pos;
+}
+
+//================================================================================================
+
+bool isEqual(double a, double b)
+{
+  return abs(a - b) <= EPS;
+}
+
+bool isSmaller(double a, double b)
+{
+  return b - a > EPS;
+}
+
+bool isGreater(double a, double b)
+{
+  return a - b > EPS;
+}
+
+//================================================================================================
+
+double squareRoot(double x) // 10
+{
+  double l = 0.0, r = max(1.0, x), sqr = x, steps = 100;
+  while(l <= r && steps--)
+  {
+    double mid = l + (r - l) / 2; // 3.203125
+    double sq = mid * mid; // 10.26....
+//        cout << l << " " << r << " " << mid << " " << sq << “\n”;
+    if(sq - x > EPS)
+    {
+      r = mid; // 3.28125
+    }
+    else if(x - sq > EPS)
+    {
+      l = mid; // 3.125
+      sqr = mid; // 3.125
+    }
+    else
+    {
+      return mid;
+    }
+  }
+  return sqr;
+}
+
+//================================================================================================
+void init(){
+  #ifndef ONLINE_JUDGE
+  freopen("input.txt","r",stdin);
+  freopen("output.txt","w",stdout);
+  freopen("error.txt","w",stderr);
+#endif  
+}
+
+//================================================================================================
+
+void solve(){
+
+  int n;cin>>n;
+  int a[n];
+  for(int &oto:a)
+    cin>>oto;
+  int k;cin>>k;
+
+  for(int i=0;i<=n-k;++i){
+    int mx=a[i];
+    for(int j=1;j<k;++j){
+      mx= max(mx,a[i+j]);
+    }
+    cout<<mx<<" ";
+  }
+  cout<<nl;
+
+}
+
+//================================================================================================
+void tcType1(){solve();}
+void tcType2(){int t;cin>>t;while (t--){solve();}}
+void tcType3(){int t;cin>>t;for(int i=1;i<=t;++i){cout<<"Case "<<i<<": ";solve();}}
+//================================================================================================
+
+int main(){
+  fast_io;
+  //fileReadWrite();
+
+  //solve();
+  tcType1();
+  //tcType2();
+  //tcType3();
+
+  return 0;
+}
