@@ -1,0 +1,70 @@
+# Multimap is similar to a map with the addition that multiple elements can have the same keys.
+
+# Multimap keeps all the keys in sorted order always.
+
+    multimap<int,string> mmp;
+
+    mmp.insert(pair<int,string>(3,"Mehedi"));
+    mmp.insert({1,"Bokul"});
+    mmp.insert({2,"Jaheda"});
+
+    multimap<int,string>::iterator itr;
+    for(itr=mmp.begin();itr!=mmp.end();++itr){
+      cout<<itr->first<<" "<<itr->second<<nl;
+    }
+
+
+    mmp.insert({3,"Munna"});
+
+    for(auto oto:mmp){
+      cout<<oto.first<<" "<<oto.second<<nl;
+    }
+
+
+    mmp.erase(mmp.begin(),mmp.find(2));
+
+    for(auto oto:mmp){
+      cout<<oto.first<<" "<<oto.second<<nl;
+    }
+
+    mmp.erase(mmp.find(3));
+
+    for(auto oto:mmp){
+      cout<<oto.first<<" "<<oto.second<<nl;
+    }
+
+
+    mmp.insert(pair<int,string>(3,"Mehedi"));
+    mmp.insert({1,"Bokul"});
+
+    for(auto oto:mmp){
+      cout<<oto.first<<" "<<oto.second<<nl;
+    }
+
+    itr=mmp.lower_bound(2);
+    cout<<"The lower bound of the key 2 is "<<itr->first<<" "<<itr->second<<nl;
+  
+    itr=mmp.upper_bound(2);
+    cout<<"The upper bound of the key 2 is "<<itr->first<<" "<<itr->second<<nl;
+
+
+
+    Output:
+1 Bokul
+2 Jaheda
+3 Mehedi
+1 Bokul
+2 Jaheda
+3 Mehedi
+3 Munna
+2 Jaheda
+3 Mehedi
+3 Munna
+2 Jaheda
+3 Munna
+1 Bokul
+2 Jaheda
+3 Munna
+3 Mehedi
+The lower bound of the key 2 is 2 Jaheda
+The upper bound of the key 2 is 3 Munna
