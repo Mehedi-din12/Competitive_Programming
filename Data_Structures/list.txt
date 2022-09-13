@@ -1,0 +1,69 @@
+    # the list has slow traversal, but once a position has been found, insertion and deletion are quick.
+    # Doubly linked list type.
+    
+    
+    list<int> lt;
+
+    lt.push_back(5);
+    lt.push_front(9);
+    lt.push_front(5);
+    lt.push_back(15);
+    lt.push_back(21);
+    lt.push_back(5);
+
+    list<int>:: iterator it;
+    for(it=lt.begin();it!=lt.end();++it){
+      cout<<*it<<nl;
+    }
+
+    lt.pop_front();
+    cout<<"after pop front->"<<nl;
+    for(it=lt.begin();it!=lt.end();++it){
+      cout<<*it<<nl;
+    }
+
+    lt.sort();
+    cout<<"after sort->"<<nl;
+    for(it=lt.begin();it!=lt.end();++it){
+      cout<<*it<<nl;
+    }
+
+    lt.unique();
+    cout<<"after unique->"<<nl;
+    for(it=lt.begin();it!=lt.end();++it){
+      cout<<*it<<nl;
+    }
+
+    lt.reverse();
+    cout<<"after reverse->"<<nl;
+    cout<<lt.front()<<nl;
+    cout<<lt.back()<<nl;
+
+    Output:
+
+5
+9
+5
+15
+21
+5
+after pop front->
+9
+5
+15
+21
+5
+after sort->
+5
+5
+9
+15
+21
+after unique->
+5
+9
+15
+21
+after reverse->
+21
+5
