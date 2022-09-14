@@ -1,0 +1,28 @@
+  # operate in a first in first out (FIFO) type of arrangement.
+  # Queues use an encapsulated object of deque or list(sequential container class).
+  
+  
+  queue<int> qu;
+
+  qu.push(50);
+  qu.push(10);
+  qu.push(30);
+  qu.push(90);
+
+  cout<<qu.size()<<nl;
+  cout<<qu.front()<<nl;
+  cout<<qu.back()<<nl;
+
+  while(!qu.empty()){
+    cout<<qu.front()<<" ";
+    qu.pop();
+  }
+  cout<<nl;
+
+
+  Output:
+
+4
+50
+90
+50 10 30 90 
