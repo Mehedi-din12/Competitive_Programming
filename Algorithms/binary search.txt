@@ -1,0 +1,24 @@
+    
+# find by upper bound
+-->
+    lli target;cin>>target;
+    auto it=v.begin();
+    it=upper_bound(v.begin(),v.end(),target);
+    --it;
+    cout<<*it<<nl;
+    if(*it==target){
+      cout<<it-v.begin()<<nl;
+    }else{
+      cout<<-1<<nl;
+    }
+
+# find by lower bound
+-->
+    lli target;cin>>target;
+    auto it=v.begin();
+    it=lower_bound(v.begin(),v.end(),target);
+    if(*it==target){
+      cout<<it-v.begin()<<nl;
+    }else{
+      cout<<-1<<nl;
+    }

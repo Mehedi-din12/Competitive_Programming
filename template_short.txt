@@ -1,0 +1,21 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+#define nl "\n"
+typedef long long int lli;
+
+void solve(){
+
+}
+
+void tcType1(){solve();}
+void tcType2(){int t;cin>>t;cin.ignore(); while (t--){solve();}}
+void tcType3(){int t;cin>>t;for(int i=1;i<=t;++i){cout<<"Case "<<i<<": ";solve();}}
+
+int main(){
+  //tcType1();
+  tcType2();
+  //tcType3();
+
+  return 0;
+}

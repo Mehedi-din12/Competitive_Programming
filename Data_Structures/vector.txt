@@ -1,0 +1,3 @@
+# upper_bound() and lower_bound()
+
+auto it=upper_bound(v.begin(),v.end(),targetValue);
